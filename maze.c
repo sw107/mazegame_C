@@ -11,6 +11,7 @@ int main()
 
     char enter;
     enter = getchar();
+    printf("%c", enter);
     
     if(enter == '\n'){
         //select_level();
