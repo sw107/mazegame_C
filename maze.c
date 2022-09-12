@@ -1,5 +1,4 @@
 #include<stdio.h>
-#include<conio.h>
 
 // 상하좌우 상수값
 #define up 72
@@ -27,7 +26,7 @@ void select_level()
                     break;
             
                 case right :                  //오른쪽 이동
-                   printf("right");
+                   printf("right\n");
                    break;
             }
         }
