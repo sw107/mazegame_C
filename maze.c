@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<windows.h>
 
 // 상하좌우 상수값
 #define up 72
@@ -10,6 +11,7 @@
 void select_level()
 {
     char key, enter;
+    system("cls");
     for(;;){
         key = getch();
         
