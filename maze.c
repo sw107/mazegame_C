@@ -10,12 +10,17 @@
 //단계 선택 함수
 void select_level()
 {
+    SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE), 4);
+    printf("1");
+    SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE), 7);
+    printf("          2");
     char key, enter;
     system("cls");
     for(;;){
         key = getch();
         
-        if(key == 13){                        //단계선택 확정
+        if(key == 13){                                                            //단계선택 확정
+            SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE), 7);
             printf("단계선택");
             break;
         }
@@ -23,13 +28,21 @@ void select_level()
         else{
             switch(key)
           {
-             case left :                      //왼쪽 이동
-                    printf("left\n");
+             case left :                                                          //왼쪽 키 누르면 1단계 선택
+                    SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE), 4);
+                    printf("1");
+                    SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE), 7);
+                    printf("          2");
+                    printf("\n");
                     break;
             
-                case right :                  //오른쪽 이동
-                   printf("right\n");
-                   break;
+                case right :                                                      //오른쪽 키 누르면 2단계 선택
+                    SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE), 7);
+                    printf("1");
+                    SetConsoleTextAttribute(GetStdHandle (STD_OUTPUT_HANDLE), 4);
+                    printf("          2");
+                    printf("\n");
+                    break;
             }
         }
     } 
