@@ -9,8 +9,9 @@ void select_level()
     system("cls");
     color(4);
     printf("1");
+    Gotxy(1,15);
     color(7);
-    printf("          2\n");
+    printf("2\n");
 
     char key, enter;
 
@@ -26,18 +27,22 @@ void select_level()
             switch (key)
             {
             case left:                                                          //왼쪽 키 누르면 1단계 선택
+                system("cls");
                 color(4);
                 printf("1");
+                Gotxy(1,15);
                 color(7);
-                printf("          2");
+                printf("2");
                 printf("\n");
                 break;
 
             case right:                                                         //오른쪽 키 누르면 2단계 선택
+                system("cls");
                 color(7);
                 printf("1");
+                Gotxy(1,15);
                 color(4);
-                printf("          2");
+                printf("2");
                 printf("\n");
                 break;
             }
