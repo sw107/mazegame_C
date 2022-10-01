@@ -8,8 +8,9 @@ void select_level()
 {
     system("cls");
     color(4);
+    Gotxy(5,5);
     printf("1");
-    Gotxy(1,15);
+    Gotxy(5,20);
     color(7);
     printf("2\n");
 
@@ -29,8 +30,9 @@ void select_level()
             case left:                                                          //왼쪽 키 누르면 1단계 선택
                 system("cls");
                 color(4);
+                Gotxy(5,5);
                 printf("1");
-                Gotxy(1,15);
+                Gotxy(5,20);
                 color(7);
                 printf("2");
                 printf("\n");
@@ -39,8 +41,9 @@ void select_level()
             case right:                                                         //오른쪽 키 누르면 2단계 선택
                 system("cls");
                 color(7);
+                Gotxy(5,5);
                 printf("1");
-                Gotxy(1,15);
+                Gotxy(5,20);
                 color(4);
                 printf("2");
                 printf("\n");
