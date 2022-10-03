@@ -3,15 +3,15 @@
 #include<windows.h>
 #include "maze.h"
 
-//단계 선택 함수
+int level = 1;
+
+//미로 선택 함수
 void select_level()
 {
-    system("cls");
-    color(4);
+    system("cls"); color(4);
     Gotxy(10,20);
     printf("1");
-    Gotxy(10,40);
-    color(7);
+    Gotxy(10,40); color(7);
     printf("2\n");
 
     char key, enter;
@@ -19,35 +19,31 @@ void select_level()
     for (;;) {
         key = getch();
 
-        if (key == 13) {                                                        //단계선택 확정
+        if (key == 13) {                                                        //미로선택 확정
             color(7);
-            system("cls");
-            printf("단계선택");
             break;
         }
         else {
             switch (key)
             {
-            case left:                                                          //왼쪽 키 누르면 1단계 선택
+            case left:                                                          //왼쪽 키 누르면 미로1 선택
                 system("cls");
-                color(4);
-                Gotxy(10,20);
+                Gotxy(10,20); color(4);
                 printf("1");
-                Gotxy(10,40);
-                color(7);
+                Gotxy(10,40); color(7);
                 printf("2");
                 printf("\n");
+                level = 1;
                 break;
 
-            case right:                                                         //오른쪽 키 누르면 2단계 선택
+            case right:                                                         //오른쪽 키 누르면 미로2 선택
                 system("cls");
-                color(7);
-                Gotxy(10,20);
+                Gotxy(10,20); color(7);
                 printf("1");
-                Gotxy(10,40);
-                color(4);
+                Gotxy(10,40); color(4);
                 printf("2");
                 printf("\n");
+                level = 2;
                 break;
             }
         }
@@ -62,15 +58,20 @@ int main()
     printf("미로 찾기게임");
     Gotxy(15, 15);
     printf("시작하려면 enter키를 입력하세요.");
-
-    char enter;
-    enter = getchar();
-    printf("%c", enter);
-
-    if (enter == '\n') {
-        select_level();
-    }
-
     
+    char enter;
+    for(;;){
+        enter = getchar();
+        printf("%c", enter);
+        if (enter == '\n') {
+            select_level();
+            break;
+        }
+    }
+    
+    system("cls");
+    printf("미로 %d 선택", level);
+
+    getch();
     return 0;
 }
