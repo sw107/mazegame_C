@@ -1,6 +1,7 @@
 #ifndef MAZE_H
 # define MAZE_H
 # include<windows.h>
+# include<stdio.h>
 
 // 상하좌우 상수값
 # define up 72
@@ -31,5 +32,10 @@ void Gotxy(int x, int y)
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
+int main()
+{
+    cursor(0);
+    system("mode con cols=60 lines=20 | title mazegame");    //콘솔창 크기 설정
+}
 
 #endif 

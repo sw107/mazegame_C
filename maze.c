@@ -56,8 +56,6 @@ void select_level()
 
 int main()
 {
-    system("mode con cols=60 lines=20 | title mazegame");    //콘솔창 크기 설정
-    cursor(0);
     Gotxy(6, 23);
     printf("미로 찾기게임");
     Gotxy(15, 15);
