@@ -8,17 +8,16 @@ int level = 1;
 //미로 선택 함수
 void select_level()
 {
-    system("cls"); color(4);
-    Gotxy(10,20);
+    system("cls"); 
+    Gotxy(10,20); color(4);
     printf("1");
     Gotxy(10,40); color(7);
-    printf("2\n");
+    printf("2");
 
     char key, enter;
 
     for (;;) {
         key = getch();
-
         if (key == 13) {                                                        //미로선택 확정
             color(7);
             break;
@@ -32,7 +31,6 @@ void select_level()
                 printf("1");
                 Gotxy(10,40); color(7);
                 printf("2");
-                printf("\n");
                 level = 1;
                 break;
 
@@ -42,7 +40,6 @@ void select_level()
                 printf("1");
                 Gotxy(10,40); color(4);
                 printf("2");
-                printf("\n");
                 level = 2;
                 break;
             }
