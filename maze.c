@@ -47,6 +47,15 @@ void select_level()
     }
 }
 
+void move()
+{
+    //■
+    char key;
+    for(;;){
+        key = getchar();
+    }
+}
+
 int main()
 {
     cursor(0);
@@ -68,7 +77,11 @@ int main()
     
     system("cls");
     printf("미로 %d 선택", level);
+    getch();
+    system("cls");
 
+    char a[100][100] = {"■■■■■■■■■■■\0","■             ■\0","■■■■■■■■■■■\0"};
+    printf("%s\n%s\n%s", a[0], a[1], a[2]);
     getch();
     return 0;
 }
