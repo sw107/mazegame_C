@@ -1,9 +1,18 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
+#include<conio.h>
 #include<windows.h>
 #include "maze.h"
-
+//■
 int level = 1;
+
+//방향키 입력함수
+int move()
+{   
+    char key;
+    key = _getch();
+    return key;
+}
 
 //미로 선택 함수
 void select_level()
@@ -17,7 +26,7 @@ void select_level()
     char key, enter;
 
     for (;;) {
-        key = getch();
+        key = _getch();
         if (key == 13) {                                                        //미로선택 확정
             color(7);
             break;
@@ -47,14 +56,7 @@ void select_level()
     }
 }
 
-void move()
-{
-    //■
-    char key;
-    for(;;){
-        key = getchar();
-    }
-}
+
 
 int main()
 {
@@ -79,9 +81,13 @@ int main()
     printf("미로 %d 선택", level);
     getch();
     system("cls");
+    int a[100][100] = {{1,0,1}};
+    printf("%d\n", move());
+    printf("%d\n%d\n%d", a[0][0], a[0][1], a[0][2]);
+    getch();
 
-    char a[100][100] = {"■■■■■■■■■■■\0","■             ■\0","■■■■■■■■■■■\0"};
-    printf("%s\n%s\n%s", a[0], a[1], a[2]);
+    
+    
     getch();
     return 0;
 }
