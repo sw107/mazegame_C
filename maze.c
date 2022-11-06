@@ -56,6 +56,24 @@ void select_level()
     }
 }
 
+//미로출력 함수
+void printmaze(int maze[][10])
+{
+    for(int i=0;i<10;i++){
+        for(int j=0;j<10;j++){
+            if(maze[i][j] == 1)
+                printf("■");
+            else if(maze[i][j] == 0)
+                printf(" ");
+            else if(maze[i][j] == 2)
+                printf("▲");
+        }
+
+        printf("\n");
+    }
+    
+}
+
 
 
 int main()
@@ -79,14 +97,20 @@ int main()
     
     system("cls");
     printf("미로 %d 선택", level);
-    getch();
     system("cls");
-    int a[100][100] = {{1,0,1}};
     printf("%d\n", move());
-    printf("%d\n%d\n%d", a[0][0], a[0][1], a[0][2]);
     getch();
-
-    
+    int maze1[10][10] = {{1,1,1,1,1,1,1,1,1,1},
+                         {1,0,0,0,0,0,0,0,0,1},
+                         {1,0,0,0,0,0,0,0,0,1},
+                         {1,0,0,0,0,0,0,0,0,1},
+                         {1,0,0,0,0,0,0,0,0,1},
+                         {1,0,0,0,0,2,0,0,0,1},
+                         {1,0,0,0,0,0,0,0,0,1},
+                         {1,0,0,0,0,0,0,0,0,1},
+                         {1,0,0,0,0,0,0,0,0,1},
+                         {1,1,1,1,1,1,1,1,1,1}};
+    printmaze(maze1);
     
     getch();
     return 0;
