@@ -5,15 +5,53 @@
 #include "maze.h"
 //■
 int level = 1;
+int x = 1,y = 1;
 
 //방향키 입력함수
 int move()
 {   
     char key;
     key = _getch();
+    if(key == -32)
+        key = _getch();
     return key;
 }
 
+void upmove(int maze[][10])
+{
+    if(maze[x-1][y] != 1){
+            maze[x][y] = 0;
+            maze[x-1][y] = 2;
+            x = x-1;
+    }
+}
+
+void downmove(int maze[][10])
+{
+    if(maze[x+1][y] != 1){
+            maze[x][y] = 0;
+            maze[x+1][y] = 2;
+            x = x+1;
+    }
+}
+
+void rightmove(int maze[][10])
+{
+    if(maze[x][y+1] != 1){
+            maze[x][y] = 0;
+            maze[x][y+1] = 2;
+            y=y+1;
+    }
+}
+
+void leftmove(int maze[][10])
+{
+    if(maze[x][y-1] != 1){
+            maze[x][y] = 0;
+            maze[x][y-1] = 2;
+            y = y-1;
+    }
+}
 //미로 선택 함수
 void select_level()
 {
@@ -101,16 +139,43 @@ int main()
     printf("%d\n", move());
     getch();
     int maze1[10][10] = {{1,1,1,1,1,1,1,1,1,1},
+                         {1,2,0,0,0,0,0,0,0,1},
                          {1,0,0,0,0,0,0,0,0,1},
                          {1,0,0,0,0,0,0,0,0,1},
                          {1,0,0,0,0,0,0,0,0,1},
                          {1,0,0,0,0,0,0,0,0,1},
-                         {1,0,0,0,0,2,0,0,0,1},
                          {1,0,0,0,0,0,0,0,0,1},
                          {1,0,0,0,0,0,0,0,0,1},
                          {1,0,0,0,0,0,0,0,0,1},
                          {1,1,1,1,1,1,1,1,1,1}};
     printmaze(maze1);
+    while(1)
+    {
+    if(move() == up){
+        upmove(maze1);
+        system("cls");
+        printmaze(maze1);
+        }
+    
+    else if (move() == down){
+        downmove(maze1);
+        system("cls");
+        printmaze(maze1);
+        }
+    
+    else if (move() == right){
+        rightmove(maze1);
+        system("cls");
+        printmaze(maze1);
+        }
+    
+    else if (move() == left){
+        leftmove(maze1);
+        system("cls");
+        printmaze(maze1);
+        }
+    
+    }
     
     getch();
     return 0;
