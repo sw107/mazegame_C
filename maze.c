@@ -1,11 +1,10 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<conio.h>
 #include<windows.h>
 #include "maze.h"
-//■
+
 int level = 1;
-int x = 0,y = 1;
+int x,y;
 
 int maze1[20][20] = {{1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                      {1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,1,0,0,0,1},
@@ -29,16 +28,28 @@ int maze1[20][20] = {{1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
         };
 
-//방향키 입력함수
-int move()
-{   
-    char key;
-    key = _getch();
-    if(key == -32)
-        key = _getch();
-    return key;
-}
+int maze2[20][20] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+                     {1,1,0,1,0,0,0,1,0,0,0,0,0,0,1,1,1,1,1,1},
+                     {1,0,0,1,0,1,0,0,0,0,1,1,1,1,1,1,0,0,0,3},
+                     {1,0,1,1,1,1,0,1,1,1,1,0,0,0,1,1,0,1,1,1},
+                     {1,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0,0,1,1,1},
+                     {1,0,1,1,0,1,0,1,1,1,1,1,1,1,1,1,0,0,0,1},
+                     {1,0,0,1,0,1,0,0,0,0,0,0,1,1,0,1,1,1,0,1},
+                     {1,1,0,1,0,1,1,0,1,1,1,0,1,0,0,0,0,0,0,1},
+                     {1,0,0,1,0,0,0,0,1,0,0,0,1,0,1,1,1,1,1,1},
+                     {1,0,1,1,1,0,0,1,0,0,0,0,1,0,1,1,1,1,1,1},
+                     {1,1,1,1,1,1,0,1,1,1,1,0,1,0,1,0,0,0,1,1},
+                     {1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1},
+                     {1,0,1,0,1,1,1,1,0,1,0,0,1,1,1,1,0,0,0,1},
+                     {1,0,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,0,1},
+                     {1,0,0,1,0,0,0,0,1,1,0,0,0,0,1,1,1,0,0,1},
+                     {1,0,0,1,1,0,1,0,0,0,0,1,1,1,1,1,1,0,0,1},
+                     {1,1,0,0,0,0,1,1,0,1,0,0,1,1,1,1,1,0,0,1},
+                     {1,0,0,1,0,1,1,0,0,1,1,0,0,0,1,1,1,0,0,1},
+                     {1,0,0,1,0,1,1,1,0,0,0,0,1,0,0,1,1,0,0,1},
+                     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1}};
 
+//위로 이동
 void upmove(int maze[][20])
 {
     if(maze[x-1][y] != 1){
@@ -47,7 +58,7 @@ void upmove(int maze[][20])
             x = x-1;
     }
 }
-
+//아래로 이동
 void downmove(int maze[][20])
 {
     if(maze[x+1][y] != 1){
@@ -56,7 +67,7 @@ void downmove(int maze[][20])
             x = x+1;
     }
 }
-
+//오른쪽 이동
 void rightmove(int maze[][20])
 {
     if(maze[x][y+1] != 1){
@@ -65,7 +76,7 @@ void rightmove(int maze[][20])
             y=y+1;
     }
 }
-
+//왼쪽 이동
 void leftmove(int maze[][20])
 {
     if(maze[x][y-1] != 1){
@@ -74,6 +85,7 @@ void leftmove(int maze[][20])
             y = y-1;
     }
 }
+
 //미로 선택 함수
 void select_level()
 {
@@ -148,55 +160,53 @@ void select_level()
 //미로출력 함수
 void printmaze(int maze[][20])
 {
+    system("cls");
     for(int i=0;i<20;i++){
         for(int j=0;j<20;j++){
-            if(maze[i][j] == 1){
+            if(maze[i][j] == 1){                                                //미로 벽       
                 color(1);
                 printf("■ ");
             }
-            else if(maze[i][j] == 0){
+            else if(maze[i][j] == 0){                                           //미로 길
                 color(7);
                 printf("  ");
             }
-            else if(maze[i][j] == 2){
+            else if(maze[i][j] == 2){                                           //유저 위치
                 color(4);
                 printf("▲ ");
             }
-            else if(maze[i][j] == 3){
+            else if(maze[i][j] == 3){                                           //탈출 지점 
                 color(4);
                 printf("● ");
             }
         }
-
         puts("");
     }
     
 }
 
+//유저 이동
 void movemaze(int maze[][20]){
-    if(move() == up){
-        upmove(maze);
-        system("cls");
-        printmaze(maze);
-        }
+    char key = _getch();
+    if (key == -32){
+        key = _getch();
     
-    else if (move() == down){
-        downmove(maze);
-        system("cls");
-        printmaze(maze);
-        }
+        if(key == up){
+            upmove(maze);
+            }
     
-    else if (move() == right){
-        rightmove(maze);
-        system("cls");
-        printmaze(maze);
-        }
+        else if (key == down){
+            downmove(maze);
+            }
     
-    else if (move() == left){
-        leftmove(maze);
-        system("cls");
-        printmaze(maze);
-        }
+        else if (key == right){
+            rightmove(maze);
+            }
+    
+        else if (key == left){
+            leftmove(maze);
+            }
+    }
 }
 
 
@@ -205,7 +215,7 @@ void movemaze(int maze[][20]){
 int main()
 {
     cursor(0);
-    system("mode con cols=60 lines=25 | title mazegame");    //콘솔창 크기 설정
+    system("mode con cols=60 lines=25 | title mazegame");                       //콘솔창 크기 설정
     Gotxy(6, 23);
     printf("미로 찾기게임");
     Gotxy(15, 15);
@@ -221,17 +231,30 @@ int main()
         }
     }
     
-    
     system("cls");
     switch(level)
     {
     case 1:
-        printf("미로 1\n");
-        printmaze(maze1);
+        x = 0;
+        y = 1;
         while(1)
         {
+        printmaze(maze1);
         movemaze(maze1);
+        
         if((x==11)&&(y==19))
+            break;
+        }
+        break;
+    case 2:
+        x = 19;
+        y = 14;
+        while(1)
+        {
+        printmaze(maze2);
+        movemaze(maze2);
+
+        if((x==2)&&(y==19))
             break;
         }
         break;
