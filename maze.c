@@ -1,7 +1,17 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<conio.h>
 #include<windows.h>
 #include "maze.h"
+
+
+void upmove(int maze[][20]);
+void downmove(int maze[][20]);
+void rightmove(int maze[][20]);
+void leftmove(int maze[][20]);
+void select_level();
+void printmaze(int maze[][20]);
+void movemaze(int maze[][20]);
 
 int level = 1;
 int x,y;
@@ -49,6 +59,69 @@ int maze2[20][20] = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
                      {1,0,0,1,0,1,1,1,0,0,0,0,1,0,0,1,1,0,0,1},
                      {1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1}};
 
+int main()
+{
+    cursor(0);
+    system("mode con cols=60 lines=25 | title mazegame");                       //콘솔창 크기 설정
+    Gotxy(6, 23);
+    printf("미로 찾기게임");
+    Gotxy(15, 15);
+    printf("시작하려면 enter키를 입력하세요.");
+    
+    char enter;
+    while(1){
+        while(1){
+            enter = getchar();
+            printf("%c", enter);
+            if (enter == '\n') {
+            select_level();
+                break;
+            }
+        }
+    
+        system("cls");
+        switch(level)
+        {
+        case 1:
+            x = 0;
+            y = 1;
+            while(1)
+            {
+            printmaze(maze1);
+            movemaze(maze1);
+        
+            if((x==11)&&(y==19))
+                break;
+            }
+            system("cls");
+            Gotxy(11,27);
+            printf("clear!");
+            getch();
+            break;
+        case 2:
+            x = 19;
+            y = 14;
+            while(1)
+            {
+            printmaze(maze2);
+            movemaze(maze2);
+
+            if((x==2)&&(y==19))
+                break;
+            }
+            system("cls");
+            Gotxy(11,27);
+            printf("clear!");
+            getch();
+            break;
+        case 3:
+            return 0;
+        }
+    }
+    
+    return 0;
+}
+
 //위로 이동
 void upmove(int maze[][20])
 {
@@ -90,11 +163,11 @@ void leftmove(int maze[][20])
 void select_level()
 {
     system("cls"); 
-    Gotxy(10,20); color(4);
+    Gotxy(10,18); color(4);
     printf("1");
     Gotxy(10,40); color(7);
     printf("2");
-    Gotxy(20, 28); color(7);
+    Gotxy(20, 27); color(7);
     printf("exit");
 
     char key, enter;
@@ -109,44 +182,40 @@ void select_level()
             switch (key)
             {
             case left:                                                          //왼쪽 키 누르면 미로1 선택
-                system("cls");
-                Gotxy(10,20); color(4);
+                Gotxy(10,18); color(4);
                 printf("1");
                 Gotxy(10,40); color(7);
                 printf("2");
-                Gotxy(20, 28); color(7);
+                Gotxy(20, 27); color(7);
                 printf("exit");
                 level = 1;
                 break;
 
             case right:                                                         //오른쪽 키 누르면 미로2 선택
-                system("cls");
-                Gotxy(10,20); color(7);
+                Gotxy(10,18); color(7);
                 printf("1");
                 Gotxy(10,40); color(4);
                 printf("2");
-                Gotxy(20, 28); color(7);
+                Gotxy(20, 27); color(7);
                 printf("exit");
                 level = 2;
                 break;
             
             case down:
-                system("cls");
-                Gotxy(10,20); color(7);
+                Gotxy(10,18); color(7);
                 printf("1");
                 Gotxy(10,40); color(7);
                 printf("2");
-                Gotxy(20, 28); color(4);
+                Gotxy(20, 27); color(4);
                 printf("exit");
                 level = 3;
                 break; 
             case up:
-                system("cls");
-                Gotxy(10,20); color(4);
+                Gotxy(10,18); color(4);
                 printf("1");
                 Gotxy(10,40); color(7);
                 printf("2");
-                Gotxy(20, 28); color(7);
+                Gotxy(20, 27); color(7);
                 printf("exit");
                 level = 1;
                 break;
@@ -157,13 +226,14 @@ void select_level()
     }
 }
 
-//미로출력 함수
+//미로출력 함수s
 void printmaze(int maze[][20])
 {
-    system("cls");
+
     for(int i=0;i<20;i++){
+        Gotxy(2+i,10);
         for(int j=0;j<20;j++){
-            if(maze[i][j] == 1){                                                //미로 벽       
+            if(maze[i][j] == 1){                                               //미로 벽       
                 color(1);
                 printf("■ ");
             }
@@ -175,14 +245,13 @@ void printmaze(int maze[][20])
                 color(4);
                 printf("▲ ");
             }
-            else if(maze[i][j] == 3){                                           //탈출 지점 
+            else if(maze[i][j] == 3){                                           //탈출 지점
                 color(4);
                 printf("● ");
             }
         }
         puts("");
-    }
-    
+    }  
 }
 
 //유저 이동
@@ -207,60 +276,4 @@ void movemaze(int maze[][20]){
             leftmove(maze);
             }
     }
-}
-
-
-
-
-int main()
-{
-    cursor(0);
-    system("mode con cols=60 lines=25 | title mazegame");                       //콘솔창 크기 설정
-    Gotxy(6, 23);
-    printf("미로 찾기게임");
-    Gotxy(15, 15);
-    printf("시작하려면 enter키를 입력하세요.");
-    
-    char enter;
-    for(;;){
-        enter = getchar();
-        printf("%c", enter);
-        if (enter == '\n') {
-            select_level();
-            break;
-        }
-    }
-    
-    system("cls");
-    switch(level)
-    {
-    case 1:
-        x = 0;
-        y = 1;
-        while(1)
-        {
-        printmaze(maze1);
-        movemaze(maze1);
-        
-        if((x==11)&&(y==19))
-            break;
-        }
-        break;
-    case 2:
-        x = 19;
-        y = 14;
-        while(1)
-        {
-        printmaze(maze2);
-        movemaze(maze2);
-
-        if((x==2)&&(y==19))
-            break;
-        }
-        break;
-    case 3:
-        return 0;
-    }
-    
-    return 0;
 }

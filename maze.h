@@ -28,7 +28,7 @@ void cursor(int n)
 // 글자 출력 위치 설정
 void Gotxy(int x, int y)
 {
-    COORD Pos = { y - 1,x - 1 };
+    COORD Pos = { y , x};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Pos);
 }
 
