@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<conio.h>
 #include<windows.h>
@@ -125,7 +124,7 @@ int main()
 //위로 이동
 void upmove(int maze[][20])
 {
-    if(maze[x-1][y] != 1){
+    if(maze[x-1][y] != 1 && x != 0){
             maze[x][y] = 0;
             maze[x-1][y] = 2;
             x = x-1;
@@ -152,7 +151,7 @@ void rightmove(int maze[][20])
 //왼쪽 이동
 void leftmove(int maze[][20])
 {
-    if(maze[x][y-1] != 1){
+    if(maze[x][y-1] != 1 && y != 0){
             maze[x][y] = 0;
             maze[x][y-1] = 2;
             y = y-1;
